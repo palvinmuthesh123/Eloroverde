@@ -61,11 +61,18 @@ async function getAllGameWinner() {
 }
 
 async function getGameWinnerById(id) {
-    const gamewinner = await GameWinner.findById(id).select('-hash').lean();
-    if (!gamewinner)
-        return { error: true, message: "GameWinner not found" };
-    const stats = await GameWinner.findOne({ _id: id }).lean();
-    return { success: true, gamewinner: { ...gamewinner, ...stats } };
+    const gamewinner = await GameWinner.find({uid: id}).select('-hash').lean();
+    if (gamewinner.length==0)
+        return { success: false, message: "GameWinner not found" };
+    else
+    {
+        var arr  = []
+        for(var i = 0; i<gamewinner.length; i++)
+        {
+            arr.push(await Games.findById(gamewinner[i].gameid).select('-hash').lean())
+        }
+        return { success: true, arr };
+    }
 }
 
 async function deleteGameWinner(id) {
