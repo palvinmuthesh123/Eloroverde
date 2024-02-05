@@ -1004,7 +1004,7 @@ async function Payss(data) {
     // }
     
         var obj = {
-        amount: (parseFloat(data.amount)).toString(), // cents
+        amount: data.amount, // cents
         orderReference: parseInt(Math.random() * 10000000000).toString(),
         merchantName: "INTEGRATION TEST SHOP",
         merchantCode: "327234688",
