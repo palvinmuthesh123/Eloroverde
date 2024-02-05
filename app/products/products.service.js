@@ -743,46 +743,53 @@ async function createBuyNow(contents) {
 
 async function getAllBuyNow() {
     const orders = await Buy.find().select('-hash');
-    var mess = [];
-    var prod = [];
-    for(var i = 0; i<orders.length; i++)
+    // var mess = [];
+    // var prod = [];
+    // for(var i = 0; i<orders.length; i++)
+    // {
+    //     for(var j = 0;j<JSON.parse(orders[i].product).length; j++)
+    //     {
+    //         var pro = await Products.find({ _id: JSON.parse(orders[i].product)[j].productId }).select('-hash').lean()
+    //         var p = []
+    //         if(pro.length!=0)
+    //         {
+    //             p = await Products.find({ _id: JSON.parse(orders[i].product)[j].productId }).select('-hash').lean()
+    //         }
+    //         else
+    //         {
+    //             p = await Virals.find({ _id: JSON.parse(orders[i].product)[j].productId }).select('-hash').lean()
+    //         }
+    //         prod.push({
+    //             price : JSON.parse(orders[i].product)[j].price,
+    //             productId : JSON.parse(orders[i].product)[j].productId,
+    //             product_details : p[0],
+    //             quantity : JSON.parse(orders[i].product)[j].quantity,
+    //             status : JSON.parse(orders[i].product)[j].status,
+    //             uid: JSON.parse(orders[i].product)[j].uid
+    //         })
+    //     }
+    //     mess.push({
+    //         status: orders[i].status,
+    //         _id: orders[i]._id,
+    //         uid: orders[i].uid,
+    //         address: orders[i].address,
+    //         coupon: orders[i].coupon,
+    //         createdDate: orders[i].createdDate,
+    //         __v: orders[i].__v,
+    //         id: orders[i].id,
+    //         products: prod,
+    //         user_details: await User.find({ _id: orders[i].uid }).select('-hash').lean(),
+    //     })
+    //     prod = [];
+    // }
+    if(orders.length!=0)
     {
-        for(var j = 0;j<JSON.parse(orders[i].product).length; j++)
-        {
-            var pro = await Products.find({ _id: JSON.parse(orders[i].product)[j].productId }).select('-hash').lean()
-            var p = []
-            if(pro.length!=0)
-            {
-                p = await Products.find({ _id: JSON.parse(orders[i].product)[j].productId }).select('-hash').lean()
-            }
-            else
-            {
-                p = await Virals.find({ _id: JSON.parse(orders[i].product)[j].productId }).select('-hash').lean()
-            }
-            prod.push({
-                price : JSON.parse(orders[i].product)[j].price,
-                productId : JSON.parse(orders[i].product)[j].productId,
-                product_details : p[0],
-                quantity : JSON.parse(orders[i].product)[j].quantity,
-                status : JSON.parse(orders[i].product)[j].status,
-                uid: JSON.parse(orders[i].product)[j].uid
-            })
-        }
-        mess.push({
-            status: orders[i].status,
-            _id: orders[i]._id,
-            uid: orders[i].uid,
-            address: orders[i].address,
-            coupon: orders[i].coupon,
-            createdDate: orders[i].createdDate,
-            __v: orders[i].__v,
-            id: orders[i].id,
-            products: prod,
-            user_details: await User.find({ _id: orders[i].uid }).select('-hash').lean(),
-        })
-        prod = [];
+        return { success: true, orders };
     }
-    return { success: true, mess };
+    else
+    {
+        return { success: false, message: "No Orders" };
+    }
 }
 
 async function getBuyNowById(id) {
