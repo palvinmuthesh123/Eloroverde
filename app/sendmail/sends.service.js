@@ -23,11 +23,15 @@ async function getAllSendings() {
 }
 
 async function getSendingById(id) {
-    const sends = await Sends.findById(id).select('-hash').lean();
-    if (!sends)
-        return { error: true, message: "Sends not found" };
-    // const stats = await Sends.findOne({ _id: id }).lean();
-    return { success: true, coupon };
+    const sends = await Sends.find({uid: id}).select('-hash').lean();
+    if (sends.length==0)
+    {
+        return { success: false, message: "No new messages" };
+    }
+    else
+    {
+        return { success: true, sends };
+    }
 }
 
 async function deleteSending(id) {
