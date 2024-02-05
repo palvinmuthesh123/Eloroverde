@@ -989,7 +989,7 @@ async function updateViral(data) {
     }
 }
 
-async function Payss() {
+async function Payss(data) {
     // var obj = {
     //     amount: '100', // cents (in euro)
     //     orderReference: Date.now().toString(),
@@ -1004,7 +1004,7 @@ async function Payss() {
     // }
     
         var obj = {
-        amount: "100", // cents
+        amount: (parseFloat(data.amount) * 100).toString(), // cents
         orderReference: parseInt(Math.random() * 10000000000).toString(),
         merchantName: "INTEGRATION TEST SHOP",
         merchantCode: "327234688",
