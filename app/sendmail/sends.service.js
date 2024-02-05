@@ -22,11 +22,11 @@ async function getAllSendings() {
     return await Sends.find().select('-hash');
 }
 
-async function getSendingById(id) {
-    const sends = await Sends.find({uid: id}).select('-hash').lean();
+async function getSendingById(data) {
+    const sends = await Sends.find({email: data.email}).select('-hash').lean();
     if (sends.length==0)
     {
-        return { success: false, message: "No new messages" };
+        return { success: false, message: "No new mzessages" };
     }
     else
     {

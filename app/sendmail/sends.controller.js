@@ -5,7 +5,7 @@ const sends = require('./sends.service');
 // routes
 router.post('/', Sendings);
 router.get('/sendings', getAllSendings);
-router.get('/sending/:id', getSendingById);
+router.post('/sending', getSendingById);
 router.delete('/sending/:id', deleteSending);
 router.post('/sending', updateSending);
 
@@ -24,7 +24,7 @@ function getAllSendings(req, res, next) {
 }
 
 function getSendingById(req, res, next) {
-    sends.getSendingById(req.params.id)
+    sends.getSendingById(req.body)
         .then(sends => sends ? res.json(sends) : res.sendStatus(404))
         .catch(err => next(err));
 }
