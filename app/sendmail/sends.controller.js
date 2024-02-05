@@ -5,7 +5,7 @@ const sends = require('./sends.service');
 // routes
 router.post('/', Sendings);
 router.get('/sendings', getAllSendings);
-router.post('/sending', getSendingById);
+router.post('/sendingemail', getSendingById);
 router.delete('/sending/:id', deleteSending);
 router.post('/sending', updateSending);
 
