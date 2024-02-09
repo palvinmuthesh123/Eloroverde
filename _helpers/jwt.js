@@ -17,7 +17,7 @@ function jwt() {
             '/user/register',
             '/user/settings/all',
             '/user/update/password',
-            '/brands/',
+            '/brands',
             '/deals/',
             '/category/',
             '/virals/',
