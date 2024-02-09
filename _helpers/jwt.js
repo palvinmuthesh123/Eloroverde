@@ -17,6 +17,16 @@ function jwt() {
             '/user/register',
             '/user/settings/all',
             '/user/update/password',
+            '/brands/',
+            '/deals/',
+            '/category/',
+            '/virals/',
+            '/subcategorywithdata/',
+            '/subcategory/',
+            '/subcategory1/',
+            '/products/',
+            '/pack/',
+            '/categorywithdata',
             /static/
         ]
     });
