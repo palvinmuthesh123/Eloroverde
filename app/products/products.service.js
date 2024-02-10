@@ -241,24 +241,32 @@ async function createDeal(contents) {
 }
 
 async function getAllDeals(id) {
-    var par = {'name':''}
-    const convData = await langConv(await Deals.find().select('-hash'), par)
     const datas = await Deals.find().select('-hash');
-    const lang = await Language.find({uid: id}).select('-hash');
     var data = datas
-    if(lang[0].english)
+    if(!id.includes("id"))
     {
-        data = datas
-    }
-    else if(!lang[0].english)
-    {
-        data = convData
+        var par = {'name':''}
+        const convData = await langConv(await Deals.find().select('-hash'), par)
+        const lang = await Language.find({uid: id}).select('-hash');
+        
+        if(lang[0].english)
+        {
+            data = datas
+        }
+        else if(!lang[0].english)
+        {
+            data = convData
+        }
+        else
+        {
+            data = datas
+        }
+        return {success: true, data}
     }
     else
     {
-        data = datas
+        return {success: true, data}
     }
-    return {success: true, data}
 }
 
 async function getDealById(id) {
@@ -295,24 +303,33 @@ async function createCategory(contents) {
 
 async function getAllCategory(id) {
     // return await Category.find().select('-hash');
-    var par = {'name':'', 'stock': ''}
-    const convData = await langConv(await Category.find().select('-hash'), par)
     const datas = await Category.find().select('-hash');
-    const lang = await Language.find({uid: id}).select('-hash');
     var data = datas
-    if(lang[0].english)
+    if(!id.includes("id"))
     {
-        data = datas
-    }
-    else if(!lang[0].english)
-    {
-        data = convData
+        var par = {'name':'', 'stock': ''}
+        const convData = await langConv(await Category.find().select('-hash'), par)
+        
+        const lang = await Language.find({uid: id}).select('-hash');
+        
+        if(lang[0].english)
+        {
+            data = datas
+        }
+        else if(!lang[0].english)
+        {
+            data = convData
+        }
+        else
+        {
+            data = datas
+        }
+        return {success: true, data}
     }
     else
     {
-        data = datas
+        return {success: true, data}
     }
-    return {success: true, data}
 }
 
 async function getAllCategorywithData() {
