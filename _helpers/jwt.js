@@ -17,16 +17,16 @@ function jwt() {
             '/user/register',
             '/user/settings/all',
             '/user/update/password',
-            '/products/brands/:id',
-            '/products/deals',
-            '/products/category/',
-            '/products/virals/',
+            '/products/brands/id',
+            '/products/deals/id',
+            '/products/category/id',
+            '/products/virals/id',
             '/products/subcategorywithdata/',
             '/products/subcategory/',
             '/products/subcategory1/',
             '/products/products/',
-            '/products/pack/',
-            '/products/categorywithdata',
+            '/products/pack/id',
+            '/products/categorywithdata/id',
             /static/
         ]
     });
