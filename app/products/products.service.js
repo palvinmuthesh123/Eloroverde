@@ -161,12 +161,12 @@ async function createBrand(contents) {
 }
 
 async function getAllBrands(id) {
-    const convData = await langConv(await Brand.find().select('-hash'), par)
     const datas = await Brand.find().select('-hash');
     var data = datas
     if(id)
     {
-        // var par = {'name':''}
+        var par = {'name':''}
+        const convData = await langConv(await Brand.find().select('-hash'), par)
         const lang = await Language.find({uid: id}).select('-hash');
     if(lang[0].english)
     {
