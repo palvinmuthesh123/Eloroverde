@@ -906,91 +906,100 @@ async function createViral(contents) {
 }
 
 async function getAllVirals(id) {
-    var par = {'product_name':'', 'stock': ''}
-    const convData = await langConv(await Virals.find().select('-hash'), par)
-    const datas = await Virals.find().select('-hash');
-    const lang = await Language.find({uid: id}).select('-hash');
-    var data = datas
-    if(lang[0].english)
+    if(!id.includes("id"))
     {
-        var arr = [];
-        for(var i = 0; i<datas.length; i++)
+        var par = {'product_name':'', 'stock': ''}
+        const convData = await langConv(await Virals.find().select('-hash'), par)
+        const datas = await Virals.find().select('-hash');
+        const lang = await Language.find({uid: id}).select('-hash');
+        var data = datas
+        if(lang[0].english)
         {
-        var wish = await Wishlist.find({uid: id , productId: datas[i]._id })
-        arr.push({
-            product_name: datas[i].product_name,
-            image: datas[i].image,
-            views: datas[i].views,
-            stock: datas[i].stock,
-            sku: datas[i].sku, 
-            purchase_price: datas[i].purchase_price, 
-            retail_price: datas[i].retail_price, 
-            category: datas[i].category, 
-            quantity: datas[i].quantity, 
-            details: datas[i].details, 
-            colors: datas[i].colors, 
-            item_left: datas[i].item_left,
-            wish: wish.length!=0 ? true : false,
-            wishid: wish.length!=0 ? wish[0]._id : '', 
-            createdDate: datas[i].createdDate
-        })
+            var arr = [];
+            for(var i = 0; i<datas.length; i++)
+            {
+            var wish = await Wishlist.find({uid: id , productId: datas[i]._id })
+            arr.push({
+                product_name: datas[i].product_name,
+                image: datas[i].image,
+                views: datas[i].views,
+                stock: datas[i].stock,
+                sku: datas[i].sku, 
+                purchase_price: datas[i].purchase_price, 
+                retail_price: datas[i].retail_price, 
+                category: datas[i].category, 
+                quantity: datas[i].quantity, 
+                details: datas[i].details, 
+                colors: datas[i].colors, 
+                item_left: datas[i].item_left,
+                wish: wish.length!=0 ? true : false,
+                wishid: wish.length!=0 ? wish[0]._id : '', 
+                createdDate: datas[i].createdDate
+            })
+            }
+            data = arr
         }
-        data = arr
-    }
-    else if(!lang[0].english)
-    {
-        var arr = [];
-        for(var i = 0; i<datas.length; i++)
+        else if(!lang[0].english)
         {
-        var wish = await Wishlist.find({uid: id , productId: convData[i]._id })
-        arr.push({
-            product_name: convData[i].product_name,
-            image: convData[i].image,
-            views: convData[i].views,
-            stock: convData[i].stock,
-            sku: convData[i].sku, 
-            purchase_price: convData[i].purchase_price, 
-            retail_price: convData[i].retail_price, 
-            category: convData[i].category, 
-            quantity: convData[i].quantity, 
-            details: convData[i].details, 
-            colors: convData[i].colors, 
-            item_left: convData[i].item_left,
-            wish: wish.length!=0 ? true : false,
-            wishid: wish.length!=0 ? wish[0]._id : '', 
-            createdDate: convData[i].createdDate
-        })
+            var arr = [];
+            for(var i = 0; i<datas.length; i++)
+            {
+            var wish = await Wishlist.find({uid: id , productId: convData[i]._id })
+            arr.push({
+                product_name: convData[i].product_name,
+                image: convData[i].image,
+                views: convData[i].views,
+                stock: convData[i].stock,
+                sku: convData[i].sku, 
+                purchase_price: convData[i].purchase_price, 
+                retail_price: convData[i].retail_price, 
+                category: convData[i].category, 
+                quantity: convData[i].quantity, 
+                details: convData[i].details, 
+                colors: convData[i].colors, 
+                item_left: convData[i].item_left,
+                wish: wish.length!=0 ? true : false,
+                wishid: wish.length!=0 ? wish[0]._id : '', 
+                createdDate: convData[i].createdDate
+            })
+            }
+            data = arr
         }
-        data = arr
+        else
+        {
+            // data = datas
+            var arr = [];
+            for(var i = 0; i<datas.length; i++)
+            {
+            var wish = await Wishlist.find({uid: id , productId: datas[i]._id })
+            arr.push({
+                product_name: datas[i].product_name,
+                image: datas[i].image,
+                views: datas[i].views,
+                stock: datas[i].stock,
+                sku: datas[i].sku, 
+                purchase_price: datas[i].purchase_price, 
+                retail_price: datas[i].retail_price, 
+                category: datas[i].category, 
+                quantity: datas[i].quantity, 
+                details: datas[i].details, 
+                colors: datas[i].colors, 
+                item_left: datas[i].item_left,
+                wish: wish.length!=0 ? true : false,
+                wishid: wish.length!=0 ? wish[0]._id : '', 
+                createdDate: datas[i].createdDate
+            })
+            }
+            data = arr
+        }
+        return {success: true, data}
     }
     else
     {
-        // data = datas
-        var arr = [];
-        for(var i = 0; i<datas.length; i++)
-        {
-        var wish = await Wishlist.find({uid: id , productId: datas[i]._id })
-        arr.push({
-            product_name: datas[i].product_name,
-            image: datas[i].image,
-            views: datas[i].views,
-            stock: datas[i].stock,
-            sku: datas[i].sku, 
-            purchase_price: datas[i].purchase_price, 
-            retail_price: datas[i].retail_price, 
-            category: datas[i].category, 
-            quantity: datas[i].quantity, 
-            details: datas[i].details, 
-            colors: datas[i].colors, 
-            item_left: datas[i].item_left,
-            wish: wish.length!=0 ? true : false,
-            wishid: wish.length!=0 ? wish[0]._id : '', 
-            createdDate: datas[i].createdDate
-        })
-        }
-        data = arr
+        const datas = await Virals.find().select('-hash');
+        var arr = datas
+        return {success: true, arr}
     }
-    return {success: true, data}
 }
 
 async function getViralById(id) {
