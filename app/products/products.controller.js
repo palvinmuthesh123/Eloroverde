@@ -23,7 +23,8 @@ router.get('/category/:id', getCategoryById);
 router.delete('/category/:id', deleteCategory);
 router.post('/category' ,createCategory);
 router.get('/categorywithdata' ,getAllCategorywithData);
-router.get('/subcategorywithdata/:id' ,getAllSubCategorywithData);
+// router.get('/subcategorywithdata/:id' ,getAllSubCategorywithData);
+router.post('/subcategorywithdata' ,getAllSubCategorywithData);
 router.post('/updatecategory' ,updateCategory);
 router.get('/subcategory', getAllSubCategory);
 router.get('/subcategory/:id', getSubCategoryById);
@@ -210,7 +211,7 @@ function getAllCategorywithData(req, res, next) {
 }
 
 function getAllSubCategorywithData(req, res, next) {
-    productService.getAllSubCategorywithData(req.params.id)
+    productService.getAllSubCategorywithData(req.body)
     .then(categoy => categoy ? res.json(categoy) : res.sendStatus(404))
     .catch(err => next(err));
 }

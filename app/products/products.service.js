@@ -350,8 +350,8 @@ async function getAllCategorywithData() {
 }
 
 async function getAllSubCategorywithData(id) {
-    const subcategory = await SubCategory.findById({_id: id}).select('-hash').lean();
-    const subcategorys = await SubCategorys.find({subCategoryId: id}).select('-hash').lean();
+    const subcategory = await SubCategory.findById({_id: id.id}).select('-hash').lean();
+    const subcategorys = await SubCategorys.find({subCategoryId: id.id}).select('-hash').lean();
 
     const data = {subcategory: subcategory, subcategorys: subcategorys}
 

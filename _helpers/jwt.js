@@ -21,7 +21,7 @@ function jwt() {
             '/products/deals/id',
             '/products/category/id',
             '/products/virals/id',
-            '/products/subcategorywithdata/',
+            '/products/subcategorywithdata',
             '/products/subcategory/',
             '/products/subcategory1/',
             '/products/products/',
