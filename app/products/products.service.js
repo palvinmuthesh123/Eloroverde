@@ -482,18 +482,18 @@ async function getProductByBrand(id) {
 async function getProductBySubId(data) {
     if(data.id && data.uid=='id')
     {
-        const products = await Products.find({subCategory1Id: id}).select('-hash').lean();
+        const products = await Products.find({subCategory1Id: data.id}).select('-hash').lean();
         var arr = []
         arr = products
         return { success: true, arr };
     }
     else
     {
-        const products = await Products.find({subCategory1Id: id}).select('-hash').lean();
+        const products = await Products.find({subCategory1Id: data.id}).select('-hash').lean();
         var arr = [];
         for(var i = 0; i<products.length; i++)
         {
-            var wish = await Wishlist.find({uid: uid , productId: products[i]._id })
+            var wish = await Wishlist.find({uid: data.uid , productId: products[i]._id })
             var rev = await Review.find({ productId: products[i]._id })
             arr.push({
                 _id: products[i]._id,
