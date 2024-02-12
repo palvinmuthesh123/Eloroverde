@@ -24,7 +24,8 @@ function jwt() {
             '/products/subcategorywithdata',
             '/products/subcategory/',
             '/products/subcategory1/',
-            '/products/products/',
+            '/products/products/id',
+            '/products/productsbyid',
             '/products/pack/id',
             '/products/categorywithdata',
             /static/

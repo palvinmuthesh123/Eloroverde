@@ -479,33 +479,43 @@ async function getProductByBrand(id) {
         return { success: true, products };
 }
 
-async function getProductBySubId(id, uid) {
-    const products = await Products.find({subCategory1Id: id}).select('-hash').lean();
-    var arr = [];
-    for(var i = 0; i<products.length; i++)
+async function getProductBySubId(data) {
+    if(data.id && data.uid=='id')
     {
-        var wish = await Wishlist.find({uid: uid , productId: products[i]._id })
-        var rev = await Review.find({ productId: products[i]._id })
-        arr.push({
-            _id: products[i]._id,
-            name: products[i].name,
-            title: products[i].title,
-            description: products[i].description,
-            quantity: products[i].quantity,
-            purchaseprice: products[i].purchaseprice,
-            sku: products[i].sku,
-            retailprice: products[i].retailprice,
-            image: products[i].image,
-            createdDate: products[i].createdDate,
-            categoryId: products[i].categoryId,
-            subCategoryId: products[i].subCategoryId,
-            subCategory1Id: products[i].subCategory1Id,
-            brand: products[i].brand,
-            wish: wish.length!=0 ? true : false,
-            wishid: wish.length!=0 ? wish[0]._id : '' 
-        })
+        const products = await Products.find({subCategory1Id: id}).select('-hash').lean();
+        var arr = []
+        arr = products
+        return { success: true, arr };
     }
-    return { success: true, arr };
+    else
+    {
+        const products = await Products.find({subCategory1Id: id}).select('-hash').lean();
+        var arr = [];
+        for(var i = 0; i<products.length; i++)
+        {
+            var wish = await Wishlist.find({uid: uid , productId: products[i]._id })
+            var rev = await Review.find({ productId: products[i]._id })
+            arr.push({
+                _id: products[i]._id,
+                name: products[i].name,
+                title: products[i].title,
+                description: products[i].description,
+                quantity: products[i].quantity,
+                purchaseprice: products[i].purchaseprice,
+                sku: products[i].sku,
+                retailprice: products[i].retailprice,
+                image: products[i].image,
+                createdDate: products[i].createdDate,
+                categoryId: products[i].categoryId,
+                subCategoryId: products[i].subCategoryId,
+                subCategory1Id: products[i].subCategory1Id,
+                brand: products[i].brand,
+                wish: wish.length!=0 ? true : false,
+                wishid: wish.length!=0 ? wish[0]._id : '' 
+            })
+        }
+        return { success: true, arr };
+    }
 }
 
 async function deleteProduct(id) {

@@ -39,7 +39,8 @@ router.post('/updatesubcategory1' ,updateSubCategory1);
 router.get('/products/:id', getAllProducts);
 router.get('/products/:id', getProductById);
 router.get('/brandproducts/:id', getProductByBrand);
-router.get('/productsbyid/:id/:uid', getProductBySubId);
+// router.get('/productsbyid/:id/:uid', getProductBySubId);
+router.post('/productsbyid', getProductBySubId);
 router.delete('/products/:id', deleteProduct);
 router.post('/products' ,createProduct);
 router.post('/updateproducts' ,updateProduct);
@@ -295,7 +296,7 @@ function getProductByBrand(req, res, next) {
 }
 
 function getProductBySubId(req, res, next) {
-    productService.getProductBySubId(req.params.id, req.params.uid)
+    productService.getProductBySubId(req.body)
         .then(categoy => categoy ? res.json(categoy) : res.sendStatus(404))
         .catch(err => next(err));
 }
