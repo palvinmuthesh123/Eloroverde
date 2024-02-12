@@ -26,8 +26,9 @@ function jwt() {
             '/products/subcategory1/',
             '/products/products/id',
             '/products/productsbyid',
-            '/products/pack/id',
+            '/products/packs/id',
             '/products/categorywithdata',
+            '/products/brandproducts',
             /static/
         ]
     });

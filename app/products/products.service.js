@@ -471,8 +471,8 @@ async function getProductById(id) {
     return { success: true, products: { ...products, ...stats } };
 }
 
-async function getProductByBrand(id) {
-    const products = await Products.find({brand: id}).select('-hash').lean();
+async function getProductByBrand(data) {
+    const products = await Products.find({brand: data.id}).select('-hash').lean();
     if (products.length==0)
         return { success: false, message: "Product not found" };
     else
