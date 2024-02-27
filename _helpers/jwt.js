@@ -30,6 +30,7 @@ function jwt() {
             '/products/packs/id',
             '/products/categorywithdata',
             '/products/brandproducts',
+            '/products/packs',
             /static/,
             /public/
         ]
