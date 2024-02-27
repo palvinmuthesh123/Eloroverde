@@ -231,7 +231,7 @@ function getSubCategoryById(req, res, next) {
 
 function deleteSubCategory(req, res, next) {
     productService.deleteSubCategory(req.params.id)
-        .then(() => res.json({}))
+        .then(categoy => categoy ? res.json(categoy) : res.sendStatus(404))
         .catch(err => next(err));
 }
 
