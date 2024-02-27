@@ -863,7 +863,7 @@ async function getAllPacks(uid) {
     var arr = [];
         for(var i = 0; i<datas.length; i++)
         {
-        var wish = await Wishlist.find({uid: uid , productId: datas[i]._id })
+        var wish = await Wishlist.find({uid: uid.id , productId: datas[i]._id })
         arr.push({
             _id: datas[i]._id,
             name: datas[i].name,

@@ -64,7 +64,7 @@ router.get('/buynow/:id', getBuyNowById);
 router.delete('/buynow/:id', deleteBuyNow);
 router.post('/buynow' ,createBuyNow);
 router.post('/updatebuynow' ,updateBuyNow);
-router.get('/packs/:id', getAllPacks);
+router.post('/packs', getAllPacks);
 router.get('/pack/:id', getPackById);
 router.delete('/pack/:id', deletePack);
 router.post('/pack' ,createPack);
@@ -470,7 +470,7 @@ function createPack(req, res, next) {
 }
 
 function getAllPacks(req, res, next) {
-    productService.getAllPacks(req.params.id)
+    productService.getAllPacks(req.body)
         .then(products => res.json(products))
         .catch(err => next(err));
 }

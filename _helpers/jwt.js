@@ -11,6 +11,7 @@ function jwt() {
             // public routes that don't require authentication
             '/',
             '/static',
+            '/public',
             '/user/login',
             '/cms/cms',
             '/sends',
@@ -29,7 +30,8 @@ function jwt() {
             '/products/packs/id',
             '/products/categorywithdata',
             '/products/brandproducts',
-            /static/
+            /static/,
+            /public/
         ]
     });
 }
